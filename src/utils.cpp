@@ -8,6 +8,7 @@
 #include <X11/extensions/Xrandr.h>
 #include <cinttypes>
 #include <stdlib.h>
+#include <DisconnectedOutputError.h>
 
 //std::vector<i3ScreenManager::EDID> i3ScreenManager::utils::getAllEDIDs(std::string display_name) {
 //
@@ -93,6 +94,11 @@ i3ScreenManager::EDID i3ScreenManager::utils::getEDID(Display *x_display_pointer
         static char *s = (char*)malloc(sizeof(char) * 0);
         sprintf(s, "%02" PRIX8, raw_prop_data[prop_data_index]);
         edid.append(s);
+    }
+
+    if(size(edid) < nitems) {
+        // TODO: Throw output name
+        throw DisconnectedOutputException();
     }
 
     return edid;
