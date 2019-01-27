@@ -4,6 +4,7 @@
 #include <cstring>
 #include <cinttypes>
 #include <utils.h>
+#include <DisconnectedOutputException.h>
 
 namespace i3ScreenManager {
     Screen::Screen(Display *x_display_pointer, XRRScreenResources *x_screen_resources, RROutput output) {
@@ -40,6 +41,11 @@ namespace i3ScreenManager {
             if (strcmp (atom_name, "EDID") == 0) {
                 screen_properties.edid = i3ScreenManager::utils::getEDID(x_display_pointer, output, prop);
             }
+        }
+
+        if (screen_properties.edid == ""){
+            // TODO: Figure out some sort of actually half-decent check for this shit
+            throw DisconnectedOutputException();
         }
 
         return screen_properties;

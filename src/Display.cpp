@@ -1,5 +1,7 @@
 #include <Display.h>
 
+#include <DisconnectedOutputException.h>
+
 
 i3ScreenManager::Display::Display(std::string x_display_name) {
 
@@ -15,10 +17,14 @@ i3ScreenManager::Display::Display(std::string x_display_name) {
     XRRScreenResources* screen_resources = XRRGetScreenResourcesCurrent (x_display_ptr, root);
 
     // Create a Screen for each output
-    //for (int output_index = 0; output_index < screen_resources->noutput; out//put_index++){
-    //    RROutput output = screen_resources->outputs[output_index];
-    //    screens.emplace_back(Screen(x_display_ptr, screen_resources, output));
-    //}
+    for (int output_index = 0; output_index < screen_resources->noutput; output_index++){
+        RROutput output = screen_resources->outputs[output_index];
+        try{
+            screens.emplace_back(Screen(x_display_ptr, screen_resources, output));
+        } catch (DisconnectedOutputException err) {
+            // We tried to construct a screen from an output that isn't connected
+        }
+    }
 
 }
 

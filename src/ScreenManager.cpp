@@ -13,6 +13,8 @@ void i3ScreenManager::ScreenManager::controlLoop() {
     int event_base, error_base;
     XRRQueryExtension(display.getXDisplayPtr(), &event_base, &error_base);
 
+    // TODO: WE NEED TO QUEUE EVENTS SO THAT IT WE CAN PROCESS ONES EVEN IF THEY HAPPEN FAST
+
     // This infinite loop keeps us waiting for any X events
     XEvent event;
     while(true) {
@@ -46,5 +48,6 @@ void i3ScreenManager::ScreenManager::handleMonitorChange() {
     // Re-create the display object (using the same display)
     display = Display(x_display_name);
 
+    volatile  int a = 0;
     // TODO: Setup screens from config here!
 }
