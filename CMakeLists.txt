@@ -8,8 +8,12 @@ include(gtest.cmake)
 set(TESTING_LIBS gtest pthread)
 enable_testing()
 
+# Find and link the X11 libraries
+find_package(X11 REQUIRED)
+link_libraries(${X11_LIBRARIES})
+
 include_directories(./include
-    /usr/include/X11/extensions)
+        ${X11_INCLUDE_DIR})
 
 # Find Source Files
 FILE(GLOB_RECURSE SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
