@@ -1,8 +1,10 @@
 #pragma once
 
-typedef char* EDID;
 
 namespace i3ScreenManager {
+
+    typedef char* EDID;
+
     class Screen {
 
     };
