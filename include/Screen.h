@@ -1,5 +1,7 @@
 #pragma once
 
-class Screen {
+namespace DisplayManager {
+    class Screen {
 
-};
+    };
+}
