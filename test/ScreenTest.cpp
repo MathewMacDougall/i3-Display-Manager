@@ -13,5 +13,4 @@ protected:
 };
 
 TEST_F(ScreenTest, delete_me) {
-    Screen s;
 }

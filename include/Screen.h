@@ -1,6 +1,8 @@
 #pragma once
 
-typedef char* EDID;
+#include <string>
+
+typedef std::string EDID;
 
 namespace i3ScreenManager {
     class Screen {

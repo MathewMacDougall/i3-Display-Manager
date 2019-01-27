@@ -3,6 +3,8 @@ project(i3-display-manager)
 
 set(CMAKE_CXX_STANDARD 17)
 
+find_package(PkgConfig)
+
 # GTest Setup
 include(gtest.cmake)
 set(TESTING_LIBS gtest pthread)
@@ -12,9 +14,10 @@ enable_testing()
 find_package(X11 REQUIRED)
 link_libraries(${X11_LIBRARIES})
 
-include_directories(./include
-        /usr/include/X11/extensions
-        ${X11_INCLUDE_DIR})
+include_directories(
+        ./include
+        ${X11_INCLUDE_DIR}
+)
 
 # Find Source Files
 FILE(GLOB_RECURSE SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
