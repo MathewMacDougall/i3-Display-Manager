@@ -8,9 +8,13 @@ include(gtest.cmake)
 set(TESTING_LIBS gtest pthread)
 enable_testing()
 
-# Find and link the X11 libraries
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR})
+
+# Find and link the X11 and Xrandr libraries
 find_package(X11 REQUIRED)
 link_libraries(${X11_LIBRARIES})
+find_package(Xrandr REQUIRED)
+link_libraries(${XRANDR_LIBRARIES})
 
 include_directories(./include
         /usr/include/X11/extensions
