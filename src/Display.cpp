@@ -20,7 +20,7 @@ i3ScreenManager::Display::Display(std::string x_display_name) {
     for (int output_index = 0; output_index < screen_resources->noutput; output_index++){
         RROutput output = screen_resources->outputs[output_index];
         try{
-            screens.emplace_back(Screen(x_display_ptr, screen_resources, output));
+            screens.emplace_back(Screen(x_display_ptr, root, screen_resources, output));
         } catch (DisconnectedOutputException err) {
             // We tried to construct a screen from an output that isn't connected
         }

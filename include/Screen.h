@@ -19,12 +19,25 @@ namespace i3ScreenManager {
         INVERTED=4
     };
 
+    struct PixelScreenDimensions {
+        unsigned int width_pixels;
+        unsigned int heigh_pixels;
+    };
+
+    struct PhysicalScreenDimensions {
+        unsigned int width_millimeters;
+        unsigned int height_millimeters;
+    };
+
     /**
      * Contains all the properties for a Screen that we care about
      */
     struct ScreenProperties {
         // A unique value for this Screen/Monitor
         EDID edid;
+        ScreenRotation screen_rotation;
+        PixelScreenDimensions pixel_dimensions;
+        PhysicalScreenDimensions physical_dimensions;
     };
 
     class Screen {
@@ -39,7 +52,8 @@ namespace i3ScreenManager {
          * @param output The RROutput that corresponds to this Screen. This is the approximate
          * equivalent of a "Screen/Monitor" in X
          */
-        explicit Screen(Display *x_display_pointer, XRRScreenResources *x_screen_resources, RROutput output);
+         // TODO: update comment for window
+        explicit Screen(Display *x_display_pointer, Window window, XRRScreenResources *x_screen_resources, RROutput output);
 
         /**
          * Returns the EDID of this Screen. The EDID is a unique value for the Screen.
@@ -74,8 +88,31 @@ namespace i3ScreenManager {
          */
         static ScreenProperties getScreenProperties(Display *x_display_pointer, RROutput output);
 
+        /**
+         * Extracts the EDID from the given prop
+         *
+         * @param x_display_pointer A raw pointer to the display
+         * @param output The output that contains the prop
+         * @param prop The Atom prop that contains the EDID
+         * @return The EDID from the given prop
+         */
+        static EDID getRawPropData(Display *x_display_pointer, RROutput output, Atom prop);
+
+        /**
+         * Returns a ScreenRotation given a Rotation value for a screen
+         *
+         * @param rotation The Rotation value
+         * @return The equivalent ScreenRotation of the given rotation
+         */
+        static ScreenRotation getScreenRotationFromXRotation(Rotation rotation);
+
+        static PixelScreenDimensions getPixelDimensionsFromScreenSize(XRRScreenSize* screen_size);
+
+        static PhysicalScreenDimensions getPhysicalDimensionsFromScreenSize(XRRScreenSize* screen_size);
+
         // A raw pointer to the X Display this Screen is a part of
         Display *x_display_pointer;
+        Window window;
         // The X screen resources for this Screen
         // TODO: Might be able to be removed
         XRRScreenResources *x_screen_resources;
