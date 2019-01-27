@@ -8,8 +8,12 @@ include(gtest.cmake)
 set(TESTING_LIBS gtest pthread)
 enable_testing()
 
+# Find and link the X11 libraries
+find_package(X11 REQUIRED)
+link_libraries(${X11_LIBRARIES})
+
 include_directories(./include
-    /usr/include/X11/extensions)
+        ${X11_INCLUDE_DIR})
 
 add_executable(i3-display-manager src/main.cpp
         src/Screen.cpp)
