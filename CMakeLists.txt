@@ -16,6 +16,8 @@ link_libraries(${X11_LIBRARIES})
 find_package(Xrandr REQUIRED)
 link_libraries(${XRANDR_LIBRARIES})
 
+set(CMAKE_CXX_FLAGS "-lXrandr -lXrender -ldrm -lXdamage -lXxf86vm -lXext -lX11")
+
 include_directories(./include
         /usr/include/X11/extensions
         ${X11_INCLUDE_DIR})

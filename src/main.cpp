@@ -1,10 +1,8 @@
 #include <iostream>
+#include "Screen.h"
+#include <string>
 
 #include <ScreenManager.h>
-
-// Callback:
-//     display = Display()
-//     display.setupScreensFromConfig(Config config)
 
 int main(int argc, char** argv){
     std::cout << "Hello World" << std::endl;
