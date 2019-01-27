@@ -8,6 +8,8 @@
 namespace i3ScreenManager {
     class Display {
     public:
+        Display() = delete;
+
         /**
          * Construct a display from a given display name
          *

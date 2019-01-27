@@ -29,6 +29,8 @@ namespace i3ScreenManager {
 
     class Screen {
     public:
+        Screen() = delete;
+
         /**
          * Constructs a new Screen object
          *
