@@ -16,8 +16,12 @@ include_directories(./include
         /usr/include/X11/extensions
         ${X11_INCLUDE_DIR})
 
+# Find Source Files
+FILE(GLOB_RECURSE SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+
 add_executable(i3-display-manager src/main.cpp
-        src/Screen.cpp)
+        ${SRC_FILES}
+        )
 
 # Find Test Files
 FILE(GLOB_RECURSE TEST_FILES "${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp")
