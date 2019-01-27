@@ -70,3 +70,14 @@ std::vector<i3ScreenManager::EDID> i3ScreenManager::utils::getAllEDIDs(std::stri
 
     return edids;
 }
+
+i3ScreenManager::ScreenRotation i3ScreenManager::utils::getScreenRotationFromXRotation(
+        Rotation rotation) {
+    if(rotation == 1) {
+        return i3ScreenManager::ScreenRotation::NORMAL;
+    }
+    else if(rotation == 2) {
+        return i3ScreenManager::ScreenRotation::LEFT;
+    }
+    return i3ScreenManager::ScreenRotation::NORMAL;
+}

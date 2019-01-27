@@ -3,6 +3,7 @@
 #include <Screen.h>
 #include <vector>
 #include <string>
+#include <randr.h>
 
 namespace i3ScreenManager {
     namespace utils {
@@ -15,5 +16,8 @@ namespace i3ScreenManager {
          * @return all the EDID's for screens attached to this computer
          */
         std::vector<i3ScreenManager::EDID> getAllEDIDs(std::string display_name);
+
+
+        ScreenRotation getScreenRotationFromXRotation(Rotation rotation);
     }
 };
